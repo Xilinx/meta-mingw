@@ -26,8 +26,16 @@ do_compile() {
 	:
 }
 
+FILES_${PN} += "${exec_prefix}/${TARGET_SYS}"
+
 do_install_append() {
 	# Move files to include folder where gcc-crosssdk-initial is looking
 	mv ${D}${exec_prefix}/${HOST_SYS}/include ${D}${exec_prefix}
 	rmdir ${D}${exec_prefix}/${HOST_SYS}
+
+	ln -s  ./ ${D}/${exec_prefix}/${HOST_SYS}
+}
+
+sysroot_stage_all_append_mingw32 () {
+	ln -s  ./ ${SYSROOT_DESTDIR}${exec_prefix}/${HOST_SYS}
 }
