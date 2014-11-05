@@ -31,7 +31,7 @@ do_configure_prepend() {
 }
 
 do_compile() {
-    make -f GNUmakefile CROSS=${SDK_PREFIX} CC="${CC}" clean GC
+    make -f GNUmakefile CROSS=${SDK_PREFIX} CC="${CC}" RC="${WINDRES}" clean GC
 }
 
 do_install() {
