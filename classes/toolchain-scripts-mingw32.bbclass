@@ -10,7 +10,8 @@ toolchain_create_sdk_env_script_sdkmingw32 () {
 	script=${1:-${SDK_OUTPUT}/${SDKPATH}/environment-setup-$multimach_target_sys}.bat
 	rm -f $script
 	touch $script
-	echo 'set SDKROOT=%~dp0%' >> $script
+	# Be sure to use the 'short' path, so we can have deeper directories.
+	echo 'set SDKROOT=%~sdp0%' >> $script
 	echo 'set SDKTARGETSYSROOT=%SDKROOT%'"$sysroot" >> $script
 	EXTRAPATH=""
 	for i in ${CANADIANEXTRAOS}; do
