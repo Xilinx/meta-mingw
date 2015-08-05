@@ -1,4 +1,4 @@
-meta-darwin
+meta-mingw
 ==========
 
 OpenEmbedded meta layer for mingw based SDKs
