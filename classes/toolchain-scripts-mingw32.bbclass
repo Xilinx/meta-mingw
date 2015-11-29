@@ -1,30 +1,35 @@
 # Based off of the oe-core meta/classes/toolchain-scripts.bbclass version
 toolchain_create_sdk_env_script_sdkmingw32 () {
 	# Create environment setup script
+	sdkpathnative=${7:-${SDKPATHNATIVE}}
+	prefix=${6:-${prefix_nativesdk}}
+	bindir=${5:-${bindir_nativesdk}}
 	libdir=${4:-${libdir}}
 	sysroot=${3:-${SDKTARGETSYSROOT}}
-	sysroot=${sysroot##${SDKPATH}}
-	pathnative=${SDKPATHNATIVE}
-	pathnative=${pathnative##${SDKPATH}}
 	multimach_target_sys=${2:-${REAL_MULTIMACH_TARGET_SYS}}
 	script=${1:-${SDK_OUTPUT}/${SDKPATH}/environment-setup-$multimach_target_sys}.bat
 	rm -f $script
 	touch $script
 	# Be sure to use the 'short' path, so we can have deeper directories.
 	echo 'set SDKROOT=%~sdp0%' >> $script
-	echo 'set SDKTARGETSYSROOT=%SDKROOT%'"$sysroot" >> $script
+
+	# Convert to mingw32 subpaths
+	sysroot='%SDKROOT%'${sysroot##${SDKPATH}}
+	sdkpathnative='%SDKROOT%'${sdkpathnative##${SDKPATH}}
+
+	echo 'set SDKTARGETSYSROOT='"$sysroot" >> $script
 	EXTRAPATH=""
 	for i in ${CANADIANEXTRAOS}; do
-		EXTRAPATH="$EXTRAPATH;%~\$PATH:0%$pathnative${bindir_nativesdk}/${TARGET_ARCH}${TARGET_VENDOR}-$i"
+		EXTRAPATH="$EXTRAPATH;$sdkpathnative$bindir/${TARGET_ARCH}${TARGET_VENDOR}-$i"
 	done
-	echo 'set PATH=%SDKROOT%'"$pathnative"'${bindir_nativesdk};%SDKROOT%'"$pathnative"'${bindir_nativesdk}/${TARGET_SYS}'"$EXTRAPATH"';%PATH%' >> $script
+	echo "set PATH=$sdkpathnative$bindir;$sdkpathnative$bindir/../${HOST_SYS}/bin;$sdkpathnative$bindir/${TARGET_SYS}"$EXTRAPATH';%PATH%' >> $script
 	echo 'set PKG_CONFIG_SYSROOT_DIR=%SDKTARGETSYSROOT%' >> $script
 	echo 'set PKG_CONFIG_PATH=%SDKTARGETSYSROOT%'"$libdir"'/pkgconfig' >> $script
 	echo 'set CONFIG_SITE=%SDKROOT%/site-config-'"${multimach_target_sys}" >> $script
-	echo 'set OECORE_NATIVE_SYSROOT=%SDKROOT%'"$pathnative" >> $script
+	echo "set OECORE_NATIVE_SYSROOT=$sdkpathnative" >> $script
 	echo 'set OECORE_TARGET_SYSROOT=%SDKTARGETSYSROOT%' >> $script
-	echo 'set OECORE_ACLOCAL_OPTS=-I %SDKROOT%'"$pathnative"'/usr/share/aclocal' >> $script
-	echo 'set PYTHONHOME=%SDKROOT%'"$pathnative"'${prefix_nativesdk}' >> $script
+	echo "set OECORE_ACLOCAL_OPTS=-I $sdkpathnative/usr/share/aclocal" >> $script
+	echo "set PYTHONHOME=$sdkpathnative$prefix" >> $script
 
 	toolchain_shared_env_script
 
@@ -56,6 +61,7 @@ toolchain_shared_env_script_sdkmingw32 () {
 	echo 'set CXXFLAGS=${TARGET_CXXFLAGS}' >> $script
 	echo 'set LDFLAGS=${TARGET_LDFLAGS}' >> $script
 	echo 'set CPPFLAGS=${TARGET_CPPFLAGS}' >> $script
+	echo 'set KCFLAGS=--sysroot=%SDKTARGETSYSROOT%' >> $script
 	echo 'set OECORE_DISTRO_VERSION=${DISTRO_VERSION}' >> $script
 	echo 'set OECORE_SDK_VERSION=${SDK_VERSION}' >> $script
 	echo 'set ARCH=${ARCH}' >> $script
