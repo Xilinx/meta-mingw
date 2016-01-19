@@ -43,4 +43,5 @@ do_install() {
 
     install -m 0644 ${S}/libpthreadGC2.a ${D}${libdir}/libpthread.dll.a
     install -m 0644 ${S}/pthreadGC2.dll ${D}${bindir}/libpthread-2.dll
+    install -m 0644 ${S}/pthreadGC2.dll ${D}${bindir}/pthreadGC2.dll
 }
