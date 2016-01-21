@@ -1,5 +1,5 @@
 DESCRIPTION = "Runtime libraries from MinGW-w64 project"
-LICENSE = "ZPL"
+LICENSE = "ZPL-2.1"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=bb936f0e04d8f1e19ad545100cee9654"
 
 COMPATIBLE_HOST = ".*-mingw.*"
