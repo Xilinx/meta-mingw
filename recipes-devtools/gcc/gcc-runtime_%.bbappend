@@ -4,5 +4,6 @@ FILES_libssp_append_mingw32 = " ${bindir}/libssp*.dll"
 # FILES_libgomp_append_mingw32 = " ${bindir}/libgomp*.dll"
 
 RUNTIMETARGET_remove_mingw32 = "libatomic libgomp"
+RUNTIMETARGET_remove_mingw32 = "libitm"
 
 DEPENDS_append_mingw32 = " pthreads-win32"
