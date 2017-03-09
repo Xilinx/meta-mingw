@@ -2,5 +2,10 @@ DEPENDS_append_mingw32 = " pthreads-win32"
 LDFLAGS_prepend_mingw32 = " -lpthread "
 
 CFLAGS_append_mingw32 = " -DLIBXML_STATIC"
-EXTRA_OECONF_append_mingw32 = " --enable-threads=windows --enable-static --disable-shared "
+EXTRA_OECONF_append_mingw32 = " --enable-threads=windows --enable-static"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+SRC_URI_append = " \
+		file://fix-gl_cv_prog_as_underscore-test.patch \
+		"
 
