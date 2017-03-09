@@ -1,5 +1,3 @@
-EXTRA_OECONF_mingw32 = "--enable-included-printf=yes ${CORECONF}"
-FILES_${PN}_append_mingw32 = " ${libdir}/charset.alias"
 
 # glib always provides bash-completion output, package the output but prevent
 # the dependency chain on bash (via bash-completion) for mingw32 targets only.
