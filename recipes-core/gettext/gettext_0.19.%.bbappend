@@ -9,3 +9,9 @@ SRC_URI_append = " \
 		file://fix-gl_cv_prog_as_underscore-test.patch \
 		"
 
+FILES_libgettextlib_mingw32 = "${bindir}/libgettextlib-*.dll"
+FILES_libgettextsrc_mingw32 = "${bindir}/libgettextsrc-*.dll"
+
+PACKAGES =+ "libintl"
+FILES_libintl_mingw32 = "${bindir}/libintl*.dll"
+
