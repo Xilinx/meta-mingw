@@ -5,3 +5,5 @@ PACKAGECONFIG_class-nativesdk_mingw32 = ""
 PACKAGECONFIG[stdio-redirect] = "--enable-stdio-redirect,--disable-stdio-redirect"
 PACKAGECONFIG[directx] = "--enable-directx,--disable-directx"
 
+FILES_${PN}-bin_mingw32 = "${bindir}/*.exe ${sbindir}/*.exe"
+
