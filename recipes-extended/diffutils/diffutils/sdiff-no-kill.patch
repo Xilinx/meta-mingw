@@ -1,0 +1,18 @@
+"kill" is not supported by mingw, so compile conditionally,
+(same condition as another instance of "kill" in the source code).
+
+Upstream-Status: Pending
+Signed-off-by: Juro Bystricky <juro.bystricky@intel.com>
+
+--- a/src/sdiff.c
++++ b/src/sdiff.c
+@@ -805,7 +805,9 @@
+ 
+       /* Yield an exit status indicating that a signal was received.  */
+       untrapsig (s);
++#if HAVE_WORKING_FORK
+       kill (getpid (), s);
++#endif
+ 
+       /* That didn't work, so exit with error status.  */
+       exit (EXIT_TROUBLE);
