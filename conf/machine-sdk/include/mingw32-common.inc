@@ -1,4 +1,5 @@
 SDK_OS = "mingw32"
+NATIVESDKLIBC = "libc-mingw"
 
 GCCTHREADS_mingw32 = "win32"
 
