@@ -28,8 +28,11 @@ SDKPKGSUFFIX = "nativesdk-mingw32"
 
 MACHINEOVERRIDES .= ":sdkmingw32"
 
-export WINDRES = "${HOST_PREFIX}windres --include-dir=${STAGING_INCDIR}"
-export RC = "${WINDRES}"
+WINDRES_mingw32 = "${HOST_PREFIX}windres --include-dir=${STAGING_INCDIR}"
+RC_mingw32 = "${WINDRES}"
+
+export WINDRES
+export RC
 
 BB_HASHBASE_WHITELIST_append = " WINDRES RC"
 
