@@ -31,4 +31,9 @@ do_compile() {
 	:
 }
 
+do_install_append() {
+    # install correct pthread headers
+    install -m 0644 -t ${D}${includedir} ${S}/../mingw-w64-libraries/winpthreads/include/*.h
+}
+
 FILES_${PN} += "${exec_prefix}/${TARGET_SYS}"
