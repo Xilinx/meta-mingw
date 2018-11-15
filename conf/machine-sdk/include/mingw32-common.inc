@@ -38,3 +38,6 @@ BB_HASHBASE_WHITELIST_append = " WINDRES RC"
 
 # Needed to override no-static-libs.inc
 DISABLE_STATIC_mingw32 = ""
+
+# disable security flags
+GCCPIE_mingw32 = ""
