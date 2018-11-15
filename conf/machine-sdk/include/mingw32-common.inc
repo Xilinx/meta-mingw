@@ -26,6 +26,9 @@ SDKPKGSUFFIX = "nativesdk-mingw32"
 
 MACHINEOVERRIDES .= ":sdkmingw32"
 
+TESTSDK_CLASS_NAME = "oeqa.sdkmingw.testsdk.TestSDKMinGW"
+TESTSDKEXT_CLASS_NAME = ""
+
 WINDRES_mingw32 = "${HOST_PREFIX}windres --include-dir=${STAGING_INCDIR}"
 RC_mingw32 = "${WINDRES}"
 
@@ -39,3 +42,7 @@ DISABLE_STATIC_mingw32 = ""
 
 # disable security flags
 GCCPIE_mingw32 = ""
+
+# wine and wineserver are required to test MinGW SDKs
+HOSTTOOLS += "${@'wine wineserver' if (bb.utils.contains_any('IMAGE_CLASSES', 'testsdk', True, False, d) or any(x in (d.getVar("BBINCLUDED") or "") for x in ["testsdk.bbclass"])) else ''}"
+
