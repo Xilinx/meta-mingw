@@ -29,7 +29,9 @@ toolchain_create_sdk_env_script_sdkmingw32 () {
 	echo "set OECORE_NATIVE_SYSROOT=$sdkpathnative" >> $script
 	echo 'set OECORE_TARGET_SYSROOT=%SDKTARGETSYSROOT%' >> $script
 	echo "set OECORE_ACLOCAL_OPTS=-I $sdkpathnative/usr/share/aclocal" >> $script
-	echo "set PYTHONHOME=$sdkpathnative$prefix" >> $script
+	echo 'set OECORE_BASELIB=${baselib}' >> $script
+	echo 'set OECORE_TARGET_ARCH=${TARGET_ARCH}' >> $script
+	echo 'set OECORE_TARGET_OS=${TARGET_OS}' >> $script
 
 	toolchain_shared_env_script
 
