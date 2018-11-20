@@ -10,14 +10,10 @@ LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=9f604d8a4f8e74f4f5140845a21b6674 \
                     file://libcharset/COPYING.LIB;md5=9f604d8a4f8e74f4f5140845a21b6674"
 
-SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
-           file://autoconf.patch \
-           file://add-relocatable-module.patch \
-           file://0001-Fix-link-error-when-compiling-with-gcc-O0.patch \
-          "
+SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e34509b1623cec449dfeb73d7ce9c6c6"
-SRC_URI[sha256sum] = "72b24ded17d687193c3366d0ebe7cde1e6b18f0df8c55438ac95be39e8a30613"
+SRC_URI[md5sum] = "ace8b5f2db42f7b3b3057585e80d9808"
+SRC_URI[sha256sum] = "ccf536620a45458d26ba83887a983b96827001e92a13847b45e4925cc8913178"
 
 S = "${WORKDIR}/libiconv-${PV}"
 
