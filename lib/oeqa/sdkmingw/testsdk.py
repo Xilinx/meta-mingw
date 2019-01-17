@@ -12,7 +12,7 @@ class TestSDKMinGW(TestSDK):
         """
         Get the name of the SDK file
         """
-        return d.expand("${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.xz")
+        return d.expand("${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.${SDK_ARCHIVE_TYPE}")
 
     def extract_sdk(self, tcname, sdk_dir, d):
         """
@@ -23,7 +23,14 @@ class TestSDKMinGW(TestSDK):
         try:
             # TODO: It would be nice to try and extract the SDK in Wine to make
             # sure it is well formed
-            subprocess.check_output(['tar', '-xf', tcname, '-C', sdk_dir])
+            
+            # TODO: Extract SDK according to SDK_ARCHIVE_TYPE, need to change if
+            # oe-core support other types.
+            if d.getVar("SDK_ARCHIVE_TYPE") == "zip":
+                subprocess.check_output(['unzip', '-d', sdk_dir, tcname])
+            else:
+                subprocess.check_output(['tar', '-xf', tcname, '-C', sdk_dir])
+
         except subprocess.CalledProcessError as e:
             bb.fatal("Couldn't install the SDK:\n%s" % e.output.decode("utf-8"))
 
