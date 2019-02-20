@@ -38,6 +38,17 @@ toolchain_create_sdk_env_script_sdkmingw32 () {
 	# Change unix '/' to Win32 '\'
 	sed -e 's,/,\\,g' -i $script
 
+	# set has some annoying properties:
+	# 1) If it is successful %ERRORLEVEL% is unchanged (as opposed to being set
+	#	 to 0 to indicate success)
+	# 2) Making an assignment like "set A=" is considered an error and sets
+	#	 %ERRORLEVEL% to 1.
+	#
+	# Practically, this means that if any of the set calls make an empty
+	# assignment that error will be propagated. To prevent this, a command is
+	# run to ensure that the "exit code" of this script is 0
+	echo "@%COMSPEC% /C exit 0 > NUL" >> $script
+
 	# Make the file windows friendly...
 	awk 'sub("$", "\r")' $script > $script.new
 	mv $script.new $script
@@ -81,17 +92,6 @@ toolchain_shared_env_script_sdkmingw32 () {
    FOR %%x IN (%OECORE_NATIVE_SYSROOT%\\environment-setup.d\\*.bat) DO call "%%x"
 )
 EOF
-
-	# set has some annoying properties:
-	# 1) If it is successful %ERRORLEVEL% is unchanged (as opposed to being set
-	#	 to 0 to indicate success)
-	# 2) Making an assignment like "set A=" is considered an error and sets
-	#	 %ERRORLEVEL% to 1.
-	#
-	# Practically, this means that if any of the set calls make an empty
-	# assignment that error will be propagated. To prevent this, a command is
-	# run to ensure that the "exit code" of this script is 0
-	echo "@%COMSPEC% /C exit 0 > NUL" >> $script
 }
 
 toolchain_create_sdk_siteconfig_append_sdkmingw32 () {
