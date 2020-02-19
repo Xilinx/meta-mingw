@@ -11,5 +11,5 @@ FILES_${PN}_append_mingw32 = " \
 		${libexecdir}/*gio-querymodules.exe \
 		"
 FILES_${PN}-dev_append_mingw32 = " ${libdir}/*.def"
-FILES_${PN}-utils_mingw32 = "${bindir}/*.exe"
+FILES_${PN}-utils_append_mingw32 = " ${bindir}/*.exe"
 
