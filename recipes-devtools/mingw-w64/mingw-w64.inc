@@ -5,8 +5,7 @@ COMPATIBLE_HOST = ".*-mingw.*"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/mingw-w64/mingw-w64/mingw-w64-release/mingw-w64-v${PV}.tar.bz2"
 
-SRC_URI[md5sum] = "cf5673f6d689bb5e02863e6284cc3d03"
-SRC_URI[sha256sum] = "805e11101e26d7897fce7d49cbb140d7bac15f3e085a91e0001e80b2adaf48f0"
+SRC_URI[sha256sum] = "aa20dfff3596f08a7f427aab74315a6cb80c2b086b4a107ed35af02f9496b628"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/"
 UPSTREAM_CHECK_REGEX = "mingw-w64-v(?P<pver>(\d+[\.\-_]*)+)\.tar"

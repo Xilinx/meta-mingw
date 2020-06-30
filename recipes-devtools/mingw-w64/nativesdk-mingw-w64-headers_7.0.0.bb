@@ -10,10 +10,6 @@ inherit autotools nativesdk
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = ""
 
-PACKAGECONFIG ??= "secure-api"
-
-PACKAGECONFIG[secure-api] = "--enable-secure-api,--disable-secure-api"
-
 do_configure() {
 	oe_runconf
 }
