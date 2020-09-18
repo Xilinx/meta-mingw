@@ -19,6 +19,8 @@ PROVIDES += "virtual/nativesdk-libintl"
 
 TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_TARGET}"
 
+EXTRA_OECONF_x86-64 = "--disable-lib32"
+
 do_configure() {
     oe_runconf
 }
