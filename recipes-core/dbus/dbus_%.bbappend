@@ -1,7 +1,10 @@
 FILES_${PN}_append_mingw32 = "\
+    ${bindir}/dbus-launch.exe \
+"
+
+FILES_${PN}-tools_append_mingw32 = "\
     ${bindir}/dbus-send.exe \
     ${bindir}/dbus-monitor.exe \
-    ${bindir}/dbus-launch.exe \
     ${bindir}/dbus-test-tool.exe \
     ${bindir}/dbus-update-activation-environment.exe \
 "
