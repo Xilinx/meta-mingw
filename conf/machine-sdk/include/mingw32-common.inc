@@ -24,6 +24,7 @@ SDK_PACKAGING_FUNC = "do_compile"
 SDKUSE_NLS = "no"
 SDKIMAGE_LINGUAS = ""
 SDK_DEPENDS_remove = "nativesdk-glibc-locale"
+SDK_DEPENDS_remove = "nativesdk-glibc-utils"
 
 SDKPKGSUFFIX = "nativesdk-mingw32"
 
