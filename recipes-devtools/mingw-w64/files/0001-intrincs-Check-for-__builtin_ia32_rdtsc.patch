@@ -1,0 +1,33 @@
+From 346de7591f58015d111f4d4f3b001382c04d5557 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 13 Apr 2021 18:44:25 -0700
+Subject: [PATCH] intrincs: Check for __builtin_ia32_rdtsc
+
+on modern gcc ( >=4.6 ) __rdtsc function is implemented using
+special builtin function called __builtin_ia32_rdtsc, its actually
+a define in gcc, so __has_builtin check fails for __rdtsc even
+though it is defined to imply __builtin_ia32_rdtsc(), therefore
+check for existence of __builtin_ia32_rdtsc as well
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ mingw-w64-crt/intrincs/rdtsc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mingw-w64-crt/intrincs/rdtsc.c b/mingw-w64-crt/intrincs/rdtsc.c
+index bf9c03b..df04711 100644
+--- a/mingw-w64-crt/intrincs/rdtsc.c
++++ b/mingw-w64-crt/intrincs/rdtsc.c
+@@ -11,7 +11,7 @@
+   #define __has_builtin(x) 0
+ #endif
+ 
+-#if !__has_builtin(__rdtsc)
++#if !__has_builtin(__rdtsc) && !__has_builtin(__builtin_ia32_rdtsc)
+ unsigned __int64 __rdtsc(void)
+ {
+ #ifdef _WIN64
+-- 
+2.31.1
+
