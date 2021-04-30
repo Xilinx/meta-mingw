@@ -1,0 +1,52 @@
+From 3b0af7327446ae179dc93b6a6ab1074251d348d0 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 30 Apr 2021 16:50:36 -0700
+Subject: [PATCH] winpthreads: Add __udivmoddi4
+
+Newer GCC ( 11.1.0+ ) is generating calls to __udivmoddi4 on i686
+architecture, therefore provide an implementation to avoid undefined
+references
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../winpthreads/src/libgcc/dll_math.c            | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/mingw-w64-libraries/winpthreads/src/libgcc/dll_math.c b/mingw-w64-libraries/winpthreads/src/libgcc/dll_math.c
+index aeec068..d170967 100644
+--- a/mingw-w64-libraries/winpthreads/src/libgcc/dll_math.c
++++ b/mingw-w64-libraries/winpthreads/src/libgcc/dll_math.c
+@@ -121,6 +121,7 @@ u_quad_t	__udivdi3(u_quad_t a, u_quad_t b);
+ u_quad_t	__umoddi3(u_quad_t a, u_quad_t b);
+ int		__ucmpdi2(u_quad_t a, u_quad_t b);
+ quad_t	__divmoddi4(quad_t a, quad_t b, quad_t *rem);
++u_quad_t	__udivmoddi4(u_quad_t a, u_quad_t b, u_quad_t *rem);
+ 
+ #endif /* !_LIBKERN_QUAD_H_ */
+ 
+@@ -573,7 +574,20 @@ __divmoddi4(a, b, rem)
+ 	return (negq ? -uq : uq);
+ }
+ 
++/*
++ * Divide two unsigned quads.
++ * This function is new in GCC 7.
++ */
++u_quad_t
++__udivmoddi4(a, b, rem)
++	u_quad_t a, b, *rem;
++{
++	u_quad_t q = __udivdi3(a, b);
++	if (rem)
++		*rem = a - b * q;
++	return q;
++}
++
+ #else
+ static int __attribute__((unused)) dummy;
+ #endif /*deined (_X86_) && !defined (__x86_64__)*/
+-
+-- 
+2.31.1
+
