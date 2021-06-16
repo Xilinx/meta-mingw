@@ -15,6 +15,8 @@ USE_NLS_mingw32 = "no"
 FILES_${PN}-staticdev_append_mingw32 = " ${libdir}/*.lib"
 ALLOW_EMPTY_${PN}_mingw32 = "1"
 
+DISTRO_FEATURES_FILTER_NATIVESDK_remove_mingw32 = "debuginfod"
+
 # Do what amounts to a NOOP
 SDK_PACKAGING_FUNC = "do_compile"
 

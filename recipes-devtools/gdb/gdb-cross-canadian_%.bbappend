@@ -4,3 +4,4 @@ RDEPENDS_${PN}_remove_sdkmingw32 = "nativesdk-python-core nativesdk-python-lang 
 EXTRA_OECONF_append_sdkmingw32 = " --without-curses --without-system-readline --with-python=no"
 PACKAGECONFIG_remove_sdkmingw32 = "readline"
 PACKAGECONFIG_remove_sdkmingw32 = "python"
+PACKAGECONFIG_remove_sdkmingw32 = "debuginfod"
