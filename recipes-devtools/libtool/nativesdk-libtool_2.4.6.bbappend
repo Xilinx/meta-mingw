@@ -1,1 +1,1 @@
-EXTRA_OECONF_append_mingw32 = " --disable-shared"
+EXTRA_OECONF:append:mingw32 = " --disable-shared"

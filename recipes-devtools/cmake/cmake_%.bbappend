@@ -1,2 +1,2 @@
-DEPENDS_remove_mingw32 = "ncurses"
-RDEPENDS_${PN}-bash-completion_remove_mingw32 = "bash-completion"
+DEPENDS:remove:mingw32 = "ncurses"
+RDEPENDS:${PN}-bash-completion:remove:mingw32 = "bash-completion"
