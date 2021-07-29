@@ -1,5 +1,5 @@
-FILES:libstdc++_append_mingw32 = " ${bindir}/libstdc++*.dll"
-FILES:libstdc++-staticdev_append_mingw32 = " ${libdir}/libstdc++.dll.a*"
+FILES:libstdc++:append:mingw32 = " ${bindir}/libstdc++*.dll"
+FILES:libstdc++-staticdev:append:mingw32 = " ${libdir}/libstdc++.dll.a*"
 FILES:libssp:append:mingw32 = " ${bindir}/libssp*.dll"
 # FILES:libgomp:append:mingw32 = " ${bindir}/libgomp*.dll"
 
