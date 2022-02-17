@@ -41,7 +41,7 @@ RC:mingw32 = "${WINDRES}"
 export WINDRES
 export RC
 
-BB_HASHBASE_WHITELIST:append = " WINDRES RC"
+BB_BASEHASH_IGNORE_VARS:append = " WINDRES RC"
 
 # Needed to override no-static-libs.inc
 DISABLE_STATIC:mingw32 = ""
