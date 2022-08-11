@@ -50,5 +50,4 @@ DISABLE_STATIC:mingw32 = ""
 GCCPIE:mingw32 = ""
 
 # wine and wineserver are required to test MinGW SDKs
-HOSTTOOLS += "${@'wine wineserver' if (bb.utils.contains_any('IMAGE_CLASSES', 'testsdk', True, False, d) or any(x in (d.getVar("BBINCLUDED") or "") for x in ["testsdk.bbclass"])) else ''}"
-
+HOSTTOOLS_NONFATAL += "wine wineserver"
