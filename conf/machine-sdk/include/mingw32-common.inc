@@ -35,9 +35,11 @@ MACHINEOVERRIDES .= ":sdkmingw32"
 TESTSDK_CLASS_NAME = "oeqa.sdkmingw.testsdk.TestSDKMinGW"
 TESTSDKEXT_CLASS_NAME = ""
 
+WINDMC:mingw32 = "${HOST_PREFIX}windmc"
 WINDRES:mingw32 = "${HOST_PREFIX}windres --include-dir=${STAGING_INCDIR}"
 RC:mingw32 = "${WINDRES}"
 
+export WINDMC
 export WINDRES
 export RC
 
