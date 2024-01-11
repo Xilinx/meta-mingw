@@ -43,7 +43,7 @@ export WINDMC
 export WINDRES
 export RC
 
-BB_BASEHASH_IGNORE_VARS:append = " WINDRES RC"
+BB_BASEHASH_IGNORE_VARS:append = " WINDRES RC WINDMC"
 
 # Needed to override no-static-libs.inc
 DISABLE_STATIC:mingw32 = ""
